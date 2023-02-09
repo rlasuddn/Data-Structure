@@ -37,30 +37,32 @@ class LinkedList {
   }
 
   insertAt(index, data) {
-    //연결리스트의 크기를 벗어나거나, 음수위치에 삽입 예외처리
     if (index > this.count || index < 0) {
       throw new Error('범위를 넘어갔습니다.');
     }
-    //새로운 node 생성
     let newNode = new Node(data);
 
-    //가장 앞부분에 생성할 경우와 그밖에 인덱스에서 생성할 경우를 분리
     if (index === 0) {
-      //새로 생성한 노드의 next가 head를 가리키게 하고
-      newNode.next = this.head;
-      //새로 생성한 노드를 head로 변경
       this.head = newNode;
+      newNode.next = this.head;
     } else {
+      //같은 값 참조
       let currentNode = this.head;
-      //목표 인덱스 바로 전까지 이동
       for (let i = 0; i < index - 1; i++) {
         currentNode = currentNode.next;
       }
       newNode.next = currentNode.next;
       currentNode.next = newNode;
     }
+
     this.count++;
   }
 }
+/**
+ * let currentNode = this.head; => currentNode 와 this.head는 같은 노트들 참조 => Node(1,null)
+ * currentNode = currentNode.next => currentNode에 currentNode.next값을 참조 => Node(2,null) , currentNode 와 this.head의 참조 값은 변경된다.
+ * newNode.next = currentNode.next => 새로운 노드의 다음 연결할 노드를 currentNode의 다음 노드로 참조
+ * currentNode.next = newNode; => current.next의 newNode를 연결
+ */
 
 export { Node, LinkedList };
