@@ -9,13 +9,14 @@
  * 인덱스 읽기          getNodeAt(index)
  */
 class Node {
-  constructor(data, next = null) {
+  constructor(data, next = null, prev = null) {
     this.data = data;
     this.next = next;
+    this.prev = this.prev;
   }
 }
 
-class LinkedList {
+class DoublyLinkedList {
   constructor() {
     //노드의 시작 부분
     this.head = null;
@@ -40,16 +41,6 @@ class LinkedList {
     if (index > this.count || index < 0) {
       throw new Error('범위내로 노드를 생성해주세요');
     }
-<<<<<<< Updated upstream
-    let newNode = new Node(data);
-
-    if (index === 0) {
-      this.head = newNode;
-      newNode.next = this.head;
-    } else {
-      //같은 값 참조
-      let currentNode = this.head;
-=======
 
     const newNode = new Node(data);
 
@@ -96,7 +87,6 @@ class LinkedList {
       this.count--;
       return deleteNode;
     } else {
->>>>>>> Stashed changes
       for (let i = 0; i < index - 1; i++) {
         currentNode = currentNode.next;
       }
@@ -106,10 +96,6 @@ class LinkedList {
       this.count--;
       return deleteNode;
     }
-<<<<<<< Updated upstream
-
-    this.count++;
-=======
   }
 
   deleteLast() {
@@ -127,14 +113,7 @@ class LinkedList {
       currentNode = currentNode.next;
     }
     return currentNode;
->>>>>>> Stashed changes
   }
 }
-/**
- * let currentNode = this.head; => currentNode 와 this.head는 같은 노트들 참조 => Node(1,null)
- * currentNode = currentNode.next => currentNode에 currentNode.next값을 참조 => Node(2,null) , currentNode 와 this.head의 참조 값은 변경된다.
- * newNode.next = currentNode.next => 새로운 노드의 다음 연결할 노드를 currentNode의 다음 노드로 참조
- * currentNode.next = newNode; => current.next의 newNode를 연결
- */
 
 export { Node, LinkedList };
